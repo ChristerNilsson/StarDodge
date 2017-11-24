@@ -7,3 +7,10 @@
 Inspiration:
 * https://github.com/paf31/star-dodge-clone
 * https://runelm.io/c/u4y
+
+Platforms:
+
+* Windows Yes
+* iOS No
+* Android No
+* OSX ?
