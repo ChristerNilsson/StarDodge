@@ -16,7 +16,7 @@ class StarDodge
 			circle x,y,@level
 		rect width-3,0.4*height,2,0.2*height
 	draw : ->
-		[@x,@y] = [@x+1, @y + if pressed then 1 else -1] #  or keyIsDown 32
+		[@x,@y] = [@x+1, @y + if pressed or keyIsDown 32 then 1 else -1] #  
 		sc 1
 		point @x,@y
 		if @x > width and 0.4*height < @y < 0.6*height then return @startNewGame 1
@@ -28,12 +28,12 @@ setup = ->
 	stardodge = new StarDodge
 draw = -> stardodge.draw()
 
-mousePressed = -> 
-	pressed=true
-	false
-mouseReleased = -> 
-	pressed=false
-	false
+# mousePressed = -> 
+# 	pressed=true
+# 	false
+# mouseReleased = -> 
+# 	pressed=false
+# 	false
 touchStarted = -> 
 	pressed=true
 	false
