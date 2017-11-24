@@ -30,3 +30,5 @@ draw = -> stardodge.draw()
 
 mousePressed = -> pressed=true
 mouseReleased = -> pressed=false
+touchStarted = -> pressed=true
+touchEnded = -> pressed=false
