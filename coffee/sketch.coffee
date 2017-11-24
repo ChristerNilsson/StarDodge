@@ -28,7 +28,15 @@ setup = ->
 	stardodge = new StarDodge
 draw = -> stardodge.draw()
 
-mousePressed = -> pressed=true
-mouseReleased = -> pressed=false
-touchStarted = -> pressed=true
-touchEnded = -> pressed=false
+mousePressed = -> 
+	pressed=true
+	false
+mouseReleased = -> 
+	pressed=false
+	false
+touchStarted = -> 
+	pressed=true
+	false
+touchEnded = -> 
+	pressed=false
+	false
