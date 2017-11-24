@@ -11,6 +11,6 @@ Inspiration:
 Platforms:
 
 * Windows Yes
-* iOS No
-* Android No
+* iOS Yes
+* Android Yes
 * OSX ?
