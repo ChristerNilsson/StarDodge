@@ -1,5 +1,7 @@
 # Star Dodge
 
+[Try it!](https://christernilsson.github.io/StarDodge/index.html)
+
 * Try to get from left side to right side with no collisions
 * Use the space bar or mouse or touch
 * Resize window and refresh
