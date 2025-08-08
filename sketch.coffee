@@ -3,12 +3,16 @@ touchStarted = -> touching = true; false
 touchEnded = -> touching = false; false
 mouseReleased = -> touching = false
 
-S = {x:0, y:0, level:0, d:50, stars:[]}
+echo = console.log
 
-startNewGame = (dlevel, rand = false) ->
+S = {x:0, y:0, level:0, d:50, stars:[]}
+start = new Date
+
+startNewGame = (rand = false) ->
+	start = new Date()
 	if rand then S.stars = range(height*width/S.d/S.d).map((i) -> [width*random(), height*random()])
-	Object.assign S,{level:S.level+dlevel, x:0, y:height/2}
-	
+	Object.assign S,{level:S.level, x:0, y:height/2}
+
 draw = ->
 	bg 0.5
 
@@ -21,7 +25,7 @@ draw = ->
 
 	rect width-3,0.4*height,2,0.2*height
 
-	if mouseIsPressed and 0.1*height > dist mouseX,mouseY, 0,0 then startNewGame 0,true
+	if mouseIsPressed and 0.1*height > dist mouseX,mouseY, 0,0 then startNewGame true
 	
 	[S.x,S.y] = [S.x+1, S.y + if mouseIsPressed or keyIsDown 32 then 1 else -1]
 	sc 0
@@ -29,13 +33,26 @@ draw = ->
 	line S.x, S.y, S.x + 500, S.y + 500
 	line S.x, S.y, S.x + 500, S.y - 500
 
-	if S.x > width and 0.4*height < S.y < 0.6*height then return startNewGame 1, true
-	if S.y < 0 or S.y > height or S.x > width then return startNewGame 0, false
+	if S.x > width and 0.4*height < S.y < 0.6*height 
+		S. level++
+		localStorage.stardodge = JSON.stringify {level: S.level, lastUsed : new Date()}
+		echo 'saved',localStorage.stardodge
+		start = new Date()
+		return startNewGame true
+	if S.y < 0 or S.y > height or S.x > width 
+		return startNewGame false
 	for [x,y] in S.stars
-		if S.level > dist S.x,S.y, x,y then return startNewGame 0, false
+		if S.level > dist S.x,S.y, x,y then return startNewGame false
 
 setup = ->
 	createCanvas windowWidth,windowHeight
+	value = localStorage.stardodge
+	if value == undefined or value == null or value == 'null' then value = {level: 1, lastUsed : new Date()}
+	else value = JSON.parse value
+	echo 'loaded',value
+	millis = new Date() - new Date(value.lastUsed)
+	if  millis > 60 * 60 * 1000 then value.level = 1
+	S.level = value.level
 	textAlign CENTER,CENTER
 	textSize height
-	startNewGame 1, true
+	startNewGame true
