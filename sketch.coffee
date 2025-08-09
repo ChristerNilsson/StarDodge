@@ -51,7 +51,7 @@ setup = ->
 	else value = JSON.parse value
 	echo 'loaded',value
 	millis = new Date() - new Date(value.lastUsed)
-	if  millis > 60 * 60 * 1000 then value.level = 1
+	if  millis > 24 * 60 * 60 * 1000 then value.level = 1
 	S.level = value.level
 	textAlign CENTER,CENTER
 	textSize height
